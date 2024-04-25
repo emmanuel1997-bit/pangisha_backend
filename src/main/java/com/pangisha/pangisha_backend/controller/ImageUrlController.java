@@ -1,7 +1,10 @@
 package com.pangisha.pangisha_backend.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,11 +31,17 @@ public class ImageUrlController {
                 HttpStatus.CREATED);
     }
 
-    @GetMapping("{id}/{postid}")
-    public ResponseEntity<ImageUrl> getImageById(@PathVariable(value = "id") Long id,
+    @GetMapping("{postid}")
+    public ResponseEntity<List<ImageUrl>> getImageById(
             @PathVariable(value = "postid") Long postid) {
-        return new ResponseEntity<ImageUrl>(imageUrlService.getById(id, postid), HttpStatus.OK);
+        return new ResponseEntity<List<ImageUrl>>(imageUrlService.getById(postid), HttpStatus.OK);
 
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
+        imageUrlService.deleteByPostId(id);
+        return new ResponseEntity<String>("ok it is deleted", HttpStatus.OK);
     }
 
 }
