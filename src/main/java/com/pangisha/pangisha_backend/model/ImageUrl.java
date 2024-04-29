@@ -19,4 +19,15 @@ public class ImageUrl {
     private long post_id;
     @Column(name = "image_url")
     private String image_url;
+    @Column(name = "image_url1")
+    private String image_url1;
+    @Column(name = "image_url2")
+    private String image_url2;
+    @Column(name = "image_url3")
+    private String image_url3;
+    @Column(name = "image_url4")
+    private String image_url4;
+    @Column(name = "image_url5")
+    private String image_url5;
+
 }
