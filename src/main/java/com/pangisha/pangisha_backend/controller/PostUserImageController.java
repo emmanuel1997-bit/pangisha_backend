@@ -1,6 +1,5 @@
 package com.pangisha.pangisha_backend.controller;
 
-import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pangisha.pangisha_backend.service.PostUserImageService;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable; // Import from the correct
 

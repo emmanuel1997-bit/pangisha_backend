@@ -7,13 +7,9 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable; // Import from the correct
 import org.springframework.data.domain.PageRequest;
-import org.springframework.cache.annotation.Cacheable;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.pangisha.pangisha_backend.model.ImageUrl;
 import com.pangisha.pangisha_backend.model.Post;

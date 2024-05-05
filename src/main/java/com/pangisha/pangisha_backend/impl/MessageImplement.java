@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pangisha.pangisha_backend.model.UserMessage;
-import com.pangisha.pangisha_backend.controller.UserController;
 import com.pangisha.pangisha_backend.model.Message;
 import com.pangisha.pangisha_backend.repository.MessageRepository;
 import com.pangisha.pangisha_backend.repository.UserRepository;

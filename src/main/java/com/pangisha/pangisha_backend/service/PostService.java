@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable; // Import from the correct package
-import org.springframework.data.domain.PageRequest;
 
 import com.pangisha.pangisha_backend.model.Post;
 

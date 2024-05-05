@@ -9,10 +9,6 @@ import org.springframework.data.domain.PageRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,19 +46,8 @@ public class PostController {
     @GetMapping("/home/{page}")
 
     public Page<Post> postVerified(@PathVariable int page
-    // @RequestBody User request
+
     ) {
-        //
-        // // Authenticate the user
-        // Authentication authentication = authenticationManager.authenticate(
-        // new UsernamePasswordAuthenticationToken(request.getEmail(),
-        // request.getPassword()));
-
-        // // Generate JWT token
-        // String jwt = jwtTokenProvider.generateToken(authentication);
-
-        // // Return the JWT token in the response
-        // return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 
         Pageable pageable = PageRequest.of(page, pageSize);
         return postService.getAllPostHome(pageable);

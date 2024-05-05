@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pangisha.pangisha_backend.model.ImageUrl;
-import com.pangisha.pangisha_backend.model.Post;
 import com.pangisha.pangisha_backend.repository.ImageUrlRepository;
-import com.pangisha.pangisha_backend.service.APIservice;
+
 import com.pangisha.pangisha_backend.service.ImageUrlService;
 
 import jakarta.persistence.EntityManager;
