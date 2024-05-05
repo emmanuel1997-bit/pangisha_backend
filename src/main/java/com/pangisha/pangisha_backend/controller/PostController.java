@@ -2,8 +2,17 @@ package com.pangisha.pangisha_backend.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable; // Import from the correct package
+import org.springframework.data.domain.PageRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +28,11 @@ import com.pangisha.pangisha_backend.service.PostService;
 @RestController
 @RequestMapping("/post")
 public class PostController {
-    final private PostService postService;
+    @Autowired
+    private PostService postService;
 
-    public PostController(PostService postServices) {
-        super();
-        this.postService = postServices;
-    }
+    private final int pageSize = 10;
 
-    // save data to a database API
     @PostMapping("/save")
     public ResponseEntity<Post> savePost(@RequestBody Post Post) {
         return new ResponseEntity<Post>(postService.postAdd(Post),
@@ -41,10 +47,25 @@ public class PostController {
         return postService.getAllPostbyTypeAndlocation(type, region, distric, ward, userId);
     }
 
-    @GetMapping("/home/{verified}")
-    public List<Post> postVerified(@PathVariable("verified") boolean verified) {
+    @GetMapping("/home/{page}")
 
-        return postService.getAllPostHome(verified);
+    public Page<Post> postVerified(@PathVariable int page
+    // @RequestBody User request
+    ) {
+        //
+        // // Authenticate the user
+        // Authentication authentication = authenticationManager.authenticate(
+        // new UsernamePasswordAuthenticationToken(request.getEmail(),
+        // request.getPassword()));
+
+        // // Generate JWT token
+        // String jwt = jwtTokenProvider.generateToken(authentication);
+
+        // // Return the JWT token in the response
+        // return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return postService.getAllPostHome(pageable);
     }
 
     @GetMapping("/home/{userid}/{verified}")

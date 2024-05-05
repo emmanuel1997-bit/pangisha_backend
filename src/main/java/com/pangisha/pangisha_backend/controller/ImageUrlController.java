@@ -31,10 +31,9 @@ public class ImageUrlController {
                 HttpStatus.CREATED);
     }
 
-    @GetMapping("{postid}")
-    public ResponseEntity<List<ImageUrl>> getImageById(
-            @PathVariable(value = "postid") Long postid) {
-        return new ResponseEntity<List<ImageUrl>>(imageUrlService.getById(postid), HttpStatus.OK);
+    @GetMapping()
+    public ResponseEntity<List<ImageUrl>> getAll() {
+        return new ResponseEntity<List<ImageUrl>>(imageUrlService.getAll(), HttpStatus.OK);
 
     }
 

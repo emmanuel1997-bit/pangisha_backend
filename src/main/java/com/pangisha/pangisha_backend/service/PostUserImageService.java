@@ -1,9 +1,9 @@
 package com.pangisha.pangisha_backend.service;
 
-import java.util.List;
-
-import com.pangisha.pangisha_backend.model.PostUserImageURLjoin;
+import org.springframework.data.domain.Pageable; // Import from the correct package
 
 public interface PostUserImageService {
-    List<PostUserImageURLjoin> interJoineddata();
+    // public String interJoineddata();
+
+    public String allData(Pageable pageable);
 }

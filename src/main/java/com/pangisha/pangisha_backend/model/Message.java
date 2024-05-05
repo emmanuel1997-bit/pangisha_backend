@@ -2,6 +2,8 @@ package com.pangisha.pangisha_backend.model;
 
 import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,8 +25,8 @@ public class Message {
     @Column(name = "message")
     private String message;
     @Column(name = "time_sent", nullable = false)
-    private String time_sent;
+    LocalDateTime time_sent;
     @Column(name = "image", nullable = false)
-    private boolean image;
+    boolean image;
 
 }

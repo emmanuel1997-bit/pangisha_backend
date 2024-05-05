@@ -12,22 +12,19 @@ import lombok.Data;
 @Entity
 @Table(name = "images")
 public class ImageUrl {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(name = "post_id", nullable = false)
-    private long post_id;
-    @Column(name = "image_url")
-    private String image_url;
-    @Column(name = "image_url1")
-    private String image_url1;
-    @Column(name = "image_url2")
-    private String image_url2;
-    @Column(name = "image_url3")
-    private String image_url3;
-    @Column(name = "image_url4")
-    private String image_url4;
-    @Column(name = "image_url5")
-    private String image_url5;
+    private Long image_id;
 
+    @Column(name = "image_url", length = 255)
+    private String image_url;
+
+    @Column(name = "keyvariable")
+    private String keyvariable;
+
+    @Column(name = "post_id")
+    private Long post_id;
+
+    // Constructors, getters, setters
 }

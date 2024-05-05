@@ -1,9 +1,9 @@
 package com.pangisha.pangisha_backend.impl;
 
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable; // Import from the correct package
 import org.springframework.stereotype.Service;
-
 import com.pangisha.pangisha_backend.exception.ResourceNotFoundException;
 import com.pangisha.pangisha_backend.model.Post;
 
@@ -55,9 +55,9 @@ public class PostImplement implements PostService {
     }
 
     @Override
-    public List<Post> getAllPostHome(boolean verified) {
+    public Page<Post> getAllPostHome(Pageable pageable) {
 
-        return postRepository.findAllverified(verified);
+        return postRepository.findAllverified(pageable);
     }
 
     @Override

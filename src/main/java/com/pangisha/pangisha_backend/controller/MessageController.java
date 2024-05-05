@@ -1,5 +1,6 @@
 package com.pangisha.pangisha_backend.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pangisha.pangisha_backend.model.Message;
+import com.pangisha.pangisha_backend.model.UserMessage;
 import com.pangisha.pangisha_backend.service.MessageService;
 
 @RestController
@@ -27,21 +29,31 @@ public class MessageController {
     // save data to a database API
     @PostMapping("/send")
     public ResponseEntity<Message> saveMessage(@RequestBody Message Message) {
-        return new ResponseEntity<Message>(MessageService.sendMessage(Message),
+        var message = Message;
+        message.setTime_sent(LocalDateTime.now());
+        return new ResponseEntity<Message>(MessageService.sendMessage(message),
                 HttpStatus.CREATED);
     }
 
     // get all message sent and received from only specific person
-    @GetMapping("/{sender}/{receiver}")
-    public List<Message> ListMessage(@PathVariable("sender") Long sender, @PathVariable("receiver") Long receiver) {
+    // @GetMapping("/{sender}/{receiver}")
+    // public List<Message> ListMessage(@PathVariable("sender") Long sender,
+    // @PathVariable("receiver") Long receiver) {
 
-        return MessageService.listMessage(sender, receiver);
-    }
+    // return MessageService.listMessage(sender, receiver);
+    // }
 
     @GetMapping("sender/{sender}")
-    public List<Message> ListMessageSenderAndReceived(@PathVariable("sender") Long sender) {
+    public List<UserMessage> ListMessageSendAndReceived(@PathVariable("sender") Long sender) {
 
-        return MessageService.listMessageSendandReceived(sender);
+        return MessageService.messageFetch(sender);
+        // finished
     }
 
+    @GetMapping("/{senderId}/{receiverId}")
+    public ResponseEntity<List<Message>> getMessages(@PathVariable long senderId, @PathVariable long receiverId) {
+        List<Message> messages = MessageService.getMessagesBetweenUsers(senderId, receiverId);
+        return ResponseEntity.ok(messages);
+    }
+    // finished
 }

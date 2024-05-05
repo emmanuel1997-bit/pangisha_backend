@@ -6,33 +6,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pangisha.pangisha_backend.model.ImageUrl;
-
+import com.pangisha.pangisha_backend.model.Post;
 import com.pangisha.pangisha_backend.repository.ImageUrlRepository;
-
+import com.pangisha.pangisha_backend.service.APIservice;
 import com.pangisha.pangisha_backend.service.ImageUrlService;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
 
 @Service
 public class ImageUrlImplement implements ImageUrlService {
-    ImageUrlRepository imageUrlRepository;
-    private EntityManager entityManager;
-
-    public ImageUrlImplement(ImageUrlRepository imageUrlRepository, EntityManager entityManager) {
-        super();
-        this.imageUrlRepository = imageUrlRepository;
-        this.entityManager = entityManager;
-    }
+    @Autowired
+    public ImageUrlRepository imageUrlRepository;
+    public EntityManager entityManager;
 
     @Override
     public ImageUrl saveImage(ImageUrl imageUrl) {
+
         return imageUrlRepository.save(imageUrl);
     }
 
     @Override
-    public List<ImageUrl> getById(Long posId) {
-        return imageUrlRepository.getByIds(posId);
+    public List<ImageUrl> getAll() {
+
+        return imageUrlRepository.getAll();
     }
 
     @Override
@@ -44,6 +42,12 @@ public class ImageUrlImplement implements ImageUrlService {
         query.setParameter("postId", postId);
         int rowsDeleted = query.executeUpdate();
         System.out.println("Rows deleted: " + rowsDeleted);
+    }
+
+    @Override
+    public List<ImageUrl> getByPostId(Long Id) {
+
+        return imageUrlRepository.getByPostId(Id);
     }
 
 }

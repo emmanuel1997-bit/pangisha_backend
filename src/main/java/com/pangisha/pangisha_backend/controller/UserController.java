@@ -27,10 +27,11 @@ public class UserController {
     }
 
     // save data to a database API
-    @PostMapping("/save")
-    public ResponseEntity<User> saveUser(@RequestBody User User) {
-        return new ResponseEntity<User>(UserServices.saveUsers(User),
+    @PostMapping("/register")
+    public ResponseEntity<String> saveUser(@RequestBody User User) {
+        return new ResponseEntity<String>(UserServices.findByUsername(User),
                 HttpStatus.CREATED);
+        // finished
     }
 
     // Retrive data from databases
@@ -49,9 +50,11 @@ public class UserController {
     // update data
     @PutMapping("/update/{id}")
 
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User Users) {
+    public ResponseEntity<User> updateUser(@PathVariable("id") Long id,
+            @RequestBody User Users) {
 
-        return new ResponseEntity<User>(UserServices.updateUserbyId(id, Users), HttpStatus.OK);
+        return new ResponseEntity<User>(UserServices.updateUserbyId(id, Users),
+                HttpStatus.OK);
     }
 
     // delete by id

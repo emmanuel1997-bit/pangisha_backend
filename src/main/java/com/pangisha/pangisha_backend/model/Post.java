@@ -1,6 +1,9 @@
 package com.pangisha.pangisha_backend.model;
 
 import jakarta.persistence.Id;
+
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +15,7 @@ import lombok.Data;
 @Entity
 @Table(name = "posts")
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long post_id;
@@ -26,7 +30,7 @@ public class Post {
     @Column(name = "price_month", nullable = false)
     private String price_month;
     @Column(name = "time_posted", nullable = false)
-    private String time_posted;
+    LocalDateTime time_posted;
     @Column(name = "payeach_time", nullable = false)
     private String payeach_time;
     @Column(name = "verified", nullable = false)
