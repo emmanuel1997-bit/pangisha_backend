@@ -16,6 +16,8 @@ public interface PostService {
 
     public Page<Post> getAllPostHome(Pageable pageable);
 
+    public Page<Post> getAllPostHomeByID(Pageable pageable, Long Id);
+
     public List<Post> getAllPostbyTypeAndlocation(String type, String region, String distric,
             String ward, Long userId);
 

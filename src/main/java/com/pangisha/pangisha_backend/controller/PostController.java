@@ -1,5 +1,6 @@
 package com.pangisha.pangisha_backend.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,12 @@ public class PostController {
 
     private final int pageSize = 10;
 
+    // this is post saving function
     @PostMapping("/save")
     public ResponseEntity<Post> savePost(@RequestBody Post Post) {
-        return new ResponseEntity<Post>(postService.postAdd(Post),
+        var post = Post;
+        post.setTime_posted(LocalDateTime.now());
+        return new ResponseEntity<Post>(postService.postAdd(post),
                 HttpStatus.CREATED);
     }
 
@@ -60,6 +64,7 @@ public class PostController {
 
     }
 
+    // UpdatePost
     @PutMapping("/update/{id}")
 
     public ResponseEntity<Post> updatePost(@PathVariable("id") Long id, @RequestBody Post Posts) {

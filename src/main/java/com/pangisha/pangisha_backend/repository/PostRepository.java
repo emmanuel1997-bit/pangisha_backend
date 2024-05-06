@@ -14,8 +14,11 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query(value = "SELECT * FROM posts p WHERE p.type=:type OR p.region=:region OR p.distric=:distric OR p.ward=:ward OR p.user_id=:userid ", nativeQuery = true)
     List<Post> getAllPostbyTypeAndlocation(String type, String region, String distric, String ward, Long userid);
 
-    @Query(value = "SELECT * FROM posts p  ", nativeQuery = true)
+    @Query(value = "SELECT * FROM posts   ", nativeQuery = true)
     Page<Post> findAllverified(Pageable pageable);
+
+    @Query(value = "SELECT * FROM posts p WHERE p.user_id=:userid  ", nativeQuery = true)
+    Page<Post> findAllbyId(Pageable pageable, Long userid);
 
     @Query(value = "SELECT * FROM posts p WHERE p.verified=:verified AND p.user_id=:userid ", nativeQuery = true)
     List<Post> findAllverifiedbyId(boolean verified, Long userid);

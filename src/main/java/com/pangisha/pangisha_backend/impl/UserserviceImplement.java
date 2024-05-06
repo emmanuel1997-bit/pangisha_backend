@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.pangisha.pangisha_backend.exception.ResourceNotFoundException;
 import com.pangisha.pangisha_backend.model.User;
 import com.pangisha.pangisha_backend.repository.UserRepository;
@@ -18,8 +17,6 @@ public class UserserviceImplement implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    // @Autowired
-    // private PasswordEncoder passwordEncoder;
 
     @Override
     public User saveUsers(User Users) {
@@ -31,15 +28,29 @@ public class UserserviceImplement implements UserService {
 
     @Override
     public List<User> getAllUsers() {
+
         return UserRepository.findAll();
     }
 
     @Override
     public User getUserbyId(Long id) {
 
-        // return UserRepository.findById(id).orElseThrow(() -> new
-        // ResourceNotFoundException("Users", "id", id));
         return UserRepository.getUserId(id);
+    }
+
+    @Override
+    public String login(String username, String password) {
+        User user = UserRepository.findByUsername(username);
+
+        if (user == null) {
+            return "There is no user with that email";
+        } else if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            var id = user.getUser_id();
+            return String.valueOf(id);
+        } else {
+            return "invalid Password";
+        }
+
     }
 
     @Override
@@ -47,7 +58,7 @@ public class UserserviceImplement implements UserService {
         User existingUser = UserRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Users", "id", id));
 
-        existingUser.setPassword(Users.getPassword());
+        existingUser.setPassword(passwordEncoder.encode(Users.getPassword()));
         existingUser.setEmail(Users.getEmail());
         existingUser.setFirst_name(Users.getFirst_name());
         existingUser.setEmail(Users.getEmail());
@@ -72,9 +83,9 @@ public class UserserviceImplement implements UserService {
         User existingUser = UserRepository.findByUsername(user.getEmail());
         User existingUserphone = UserRepository.findByPhoneNo(user.getPhone_no());
         if (existingUser != null) {
-            return "Username already exists";
+            return "Email already exists";
         } else if (existingUserphone != null) {
-            return "phone number alredy used";
+            return "Phone number alredy Exist";
         }
         User newuser = new User();
         newuser.setFirst_name(user.getFirst_name());
@@ -84,8 +95,8 @@ public class UserserviceImplement implements UserService {
         newuser.setPhone_no(user.getPhone_no());
         newuser.setFirst_name(user.getFirst_name());
         newuser.setPassword(passwordEncoder.encode(user.getPassword()));
-        UserRepository.save(newuser);
-        return "sucessfull registerd ";
+        var currentUser = UserRepository.save(newuser);
+        return String.valueOf(currentUser.getUser_id());
     }
 
 }

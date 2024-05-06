@@ -24,8 +24,16 @@ public class PostUserImageController {
     }
 
     @GetMapping("/allData/{page}")
-    public String postVerified(@PathVariable("page") int page) {
+    public String GetAllData(@PathVariable("page") int page) {
         Pageable pageable = PageRequest.of(page, pageSize);
         return service.allData(pageable);
     }
+
+    @GetMapping("/allData/{id}/{page}")
+    public String GetAlldatabyID(@PathVariable("page") int page, @PathVariable("id") Long id) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return service.allDatawithID(pageable, id);
+    }
 }
+
+// this is home pageview data and listing post data its now completed

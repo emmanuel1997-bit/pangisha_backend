@@ -40,6 +40,15 @@ public class UserController {
         return UserServices.getAllUsers();
     }
 
+    @PostMapping("/login/{email}/{password}")
+    public ResponseEntity<String> Login(@PathVariable("email") String email,
+            @PathVariable("password") String password) {
+
+        return new ResponseEntity<String>(UserServices.login(email, password),
+                HttpStatus.CREATED);
+        // finished
+    }
+
     // retrive by an id
     @GetMapping("{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {

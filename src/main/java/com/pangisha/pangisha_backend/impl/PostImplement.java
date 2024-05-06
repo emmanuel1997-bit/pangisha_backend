@@ -1,23 +1,23 @@
 package com.pangisha.pangisha_backend.impl;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable; // Import from the correct package
 import org.springframework.stereotype.Service;
 import com.pangisha.pangisha_backend.exception.ResourceNotFoundException;
 import com.pangisha.pangisha_backend.model.Post;
-
+import com.pangisha.pangisha_backend.repository.ImageUrlRepository;
 import com.pangisha.pangisha_backend.repository.PostRepository;
 import com.pangisha.pangisha_backend.service.PostService;
 
 @Service
 public class PostImplement implements PostService {
-    private final PostRepository postRepository;
-
-    PostImplement(PostRepository postRepository) {
-        super();
-        this.postRepository = postRepository;
-    }
+    @Autowired
+    private PostRepository postRepository;
+    @Autowired
+    private ImageUrlRepository imageRepository;
 
     @Override
     public Post postAdd(Post post) {
@@ -52,12 +52,19 @@ public class PostImplement implements PostService {
     public void delete(Long id) {
 
         postRepository.deleteById(id);
+        imageRepository.deleteById(id);
     }
 
     @Override
     public Page<Post> getAllPostHome(Pageable pageable) {
 
         return postRepository.findAllverified(pageable);
+    }
+
+    @Override
+    public Page<Post> getAllPostHomeByID(Pageable pageable, Long Id) {
+
+        return postRepository.findAllbyId(pageable, Id);
     }
 
     @Override

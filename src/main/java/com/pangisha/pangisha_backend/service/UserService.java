@@ -16,6 +16,7 @@ public interface UserService {
 
     public void deleteById(Long id);
 
-    String findByUsername(User user);
+    public String findByUsername(User user);
 
+    public String login(String email, String password);
 }
